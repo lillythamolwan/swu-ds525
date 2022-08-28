@@ -1,22 +1,48 @@
 import psycopg2
 
 
-table_drop = "DROP TABLE IF EXISTS songplays"
+table_drop_events = "DROP TABLE IF EXISTS events"
+table_drop_actors = "DROP TABLE IF EXISTS actors CASCADE"
+table_drop_repos = "DROP TABLE IF EXISTS repos CASCADE"
 
-table_create = """
-    CREATE TABLE IF NOT EXISTS xxx (
+table_create_actors = """
+    CREATE TABLE IF NOT EXISTS actors (
+        actor_id INT PRIMARY KEY, 
+        login VARCHAR(100) NOT NULL
+        
+    )
+"""
+
+table_create_events = """
+    CREATE TABLE IF NOT EXISTS events (
+        events_id TEXT PRIMARY KEY, 
+        type VARCHAR(200) NOT NULL,
+        actor_id INT NOT NULL,
+        FOREIGN KEY (actor_id)
+        REFERENCES actors (actor_id)
+
+    )
+"""
+table_create_repos = """
+    CREATE TABLE IF NOT EXISTS repos (
+        repo_id INT PRIMARY KEY, 
+        name VARCHAR(100) NOT NULL,
+        url VARCHAR(200) NOT NULL,
+        actor_id INT NOT NULL,
+        FOREIGN KEY (actor_id)
+        REFERENCES actors (actor_id)
     )
 """
 
 create_table_queries = [
-    table_create,
+    table_create_actors, table_create_events, table_create_repos
 ]
 drop_table_queries = [
-    table_drop,
+    table_drop_events, table_drop_actors, table_drop_repos
 ]
 
 
-def drop_tables(cur: PostgresCursor, conn: PostgresConn) -> None:
+def drop_tables(cur, conn) -> None:
     """
     Drops each table using the queries in `drop_table_queries` list.
     """
@@ -25,7 +51,7 @@ def drop_tables(cur: PostgresCursor, conn: PostgresConn) -> None:
         conn.commit()
 
 
-def create_tables(cur: PostgresCursor, conn: PostgresConn) -> None:
+def create_tables(cur, conn) -> None:
     """
     Creates each table using the queries in `create_table_queries` list.
     """
@@ -48,7 +74,7 @@ def main():
     )
     cur = conn.cursor()
 
-    drop_tables(cur, conn)
+    drop_tables(cur, conn) 
     create_tables(cur, conn)
 
     conn.close()

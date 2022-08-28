@@ -6,12 +6,12 @@ from typing import List
 import psycopg2
 
 
-table_insert = """
-    INSERT INTO users (
-        xxx
-    ) VALUES (%s)
-    ON CONFLICT (xxx) DO NOTHING
-"""
+#table_insert = """
+    #INSERT INTO users (
+        #xxx
+    #) VALUES (%s)
+    #ON CONFLICT (xxx) DO NOTHING
+#"""
 
 
 def get_files(filepath: str) -> List[str]:
@@ -43,7 +43,42 @@ def process(cur, conn, filepath):
                 print(each["id"], each["type"], each["actor"]["login"])
 
                 # Insert data into tables here
+                insert_statement = f"""
+                    INSERT INTO actors (
+                        actor_id,
+                        login
+                    ) VALUES ({each["actor"]["id"]}, '{each["actor"]["login"]}')
+                    ON CONFLICT (actor_id) DO NOTHING
+                """
+                # print (insert_statement)
+                cur.execute(insert_statement)
 
+                # Insert data into tables here
+                insert_statement = f"""
+                    INSERT INTO events (
+                        events_id,
+                        type,
+                        actor_id
+                    )  VALUES ('{each["id"]}', '{each["type"]}', '{each["actor"]["id"]}')
+                    ON CONFLICT (events_id) DO NOTHING
+                """
+                # print (insert_statement)
+                cur.execute(insert_statement)
+
+                # Insert data into tables here
+                insert_statement = f"""
+                    INSERT INTO repos (
+                        repo_id,
+                        name,
+                        url,
+                        actor_id
+                    )  VALUES ('{each["repo"]["id"]}', '{each["repo"]["name"]}','{each["repo"]["url"]}', '{each["actor"]["id"]}')
+                    ON CONFLICT (repo_id) DO NOTHING
+                """
+                # print (insert_statement)
+                cur.execute(insert_statement)
+
+                conn.commit()
 
 def main():
     conn = psycopg2.connect(
