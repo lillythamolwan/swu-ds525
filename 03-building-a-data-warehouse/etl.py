@@ -69,10 +69,10 @@ def insert_tables(cur, conn):
 
 
 def main():
-    host = "redshift-cluster-1.cnrhltyzddie.us-east-1.redshift.amazonaws.com"
+    host = "redshift-cluster-1.ch9yux0jr29i.us-east-1.redshift.amazonaws.com"
     dbname = "dev"
     user = "awsuser"
-    password = "akK3N3tYc98HV7s"
+    password = "hT51cr6y"
     port = "5439"
     conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
     conn = psycopg2.connect(conn_str)
@@ -82,20 +82,13 @@ def main():
     # create_tables(cur, conn)
     # load_tables(cur, conn)
     # insert_tables(cur, conn)
-    print("connection success")
-
-    create_staging = "CREATE TABLE if not exists category_staging (catname text);"
-    insert_staging = "INSERT INTO category_staging (catname) select catname from category" + \
-                        " where catname NOT IN (SELECT distinct catname from category_staging);"
     
-    query = "select * from category_staging;"
-    cur.execute(create_staging)
-    cur.execute(insert_staging)
+    query = "select * from category"
     cur.execute(query)
-    records =cur.fetchall()
+
+    records = cur.fetchall()
     for row in records:
         print(row)
-
 
     conn.close()
 
