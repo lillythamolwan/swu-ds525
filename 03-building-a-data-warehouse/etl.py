@@ -22,9 +22,9 @@ create_table_queries = [
 ]
 copy_table_queries = [
     """
-    COPY staging_events FROM 's3://zkan-swu-labs/github_events_01.json'
-    CREDENTIALS 'aws_iam_role=arn:aws:iam::377290081649:role/LabRole'
-    JSON 's3://zkan-swu-labs/events_json_path.json'
+    COPY staging_events FROM 's3://mylilly/github_events_01.json'
+    CREDENTIALS 'arn:aws:iam::600000227222:role/LabRole'
+    JSON 's3://mylilly/events_json_path.json'
     REGION 'us-east-1'
     """,
 ]
@@ -69,10 +69,10 @@ def insert_tables(cur, conn):
 
 
 def main():
-    host = "redshift-cluster-1.ch9yux0jr29i.us-east-1.redshift.amazonaws.com"
+    host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
     dbname = "dev"
     user = "awsuser"
-    password = "Lilly2009"
+    password = "hT51cr6y"
     port = "5439"
     conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
     conn = psycopg2.connect(conn_str)
