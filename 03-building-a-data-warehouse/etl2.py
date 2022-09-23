@@ -120,19 +120,19 @@ def main():
     host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
     dbname = "dev"
     user = "awsuser"
-    password = "hT51cr6y"
+    password = "Lilly230922"
     port = "5439"
     conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
     conn = psycopg2.connect(conn_str)
     cur = conn.cursor()
 
-    drop_tables(cur, conn)
-    create_tables(cur, conn)
-    load_staging_tables(cur, conn)
-    insert_tables(cur, conn)
+    #drop_tables(cur, conn)
+    #create_tables(cur, conn)
+    #load_staging_tables(cur, conn)
+    #insert_tables(cur, conn)
 
     # query data
-    query = "select * from event"
+    query = "select * from staging_events"
     cur.execute(query)
     # print data
     records = cur.fetchall()
