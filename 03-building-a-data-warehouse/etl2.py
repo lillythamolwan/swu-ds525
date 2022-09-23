@@ -1,6 +1,6 @@
 import psycopg2
 
-#Drop table ใช้สำหรับล้าง Table เพื่อรันในครั้งต่อไป
+#Drop table ใช้สำหรับล้าง Table เดิมเพื่อรันในครั้งต่อไป
 drop_table_queries = [
     "DROP TABLE IF EXISTS staging_events",
     "DROP TABLE IF EXISTS Repo",
@@ -65,9 +65,9 @@ create_table_queries = [
 
 copy_table_queries = [
     """
-    COPY staging_events FROM 's3://pleng/github_events_01.json'
-    CREDENTIALS 'aws_iam_role=arn:aws:iam::283010062450:role/LabRole'
-    JSON 's3://pleng/events_json_path.json'
+    COPY staging_events FROM 's3://mylilly/github_events_01.json'
+    CREDENTIALS 'aws_iam_role=arn:aws:iam::600000227222:role/LabRole'
+    JSON 's3://mylilly/events_json_path.json'
     REGION 'us-east-1'
     """,
 ]
@@ -117,10 +117,10 @@ def insert_tables(cur, conn):
 
 
 def main():
-    host = "redshift-cluster-1.ci0boaeqvdep.us-east-1.redshift.amazonaws.com"
+    host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
     dbname = "dev"
     user = "awsuser"
-    password = "Pleng056720990"
+    password = "hT51cr6y"
     port = "5439"
     conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
     conn = psycopg2.connect(conn_str)
