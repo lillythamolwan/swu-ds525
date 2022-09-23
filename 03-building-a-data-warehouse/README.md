@@ -12,9 +12,12 @@ Building a Data Warehouse
 **go to Tab Properties -> Network and security settings
 - select VPC security group
 - Edit Inbound rules -> Add rule -> Type redshift -> Source IPV4address -> Save rules
+- Modify publicly accessible setting -> Enable -> Save changes
 
 ![image](https://user-images.githubusercontent.com/111696729/191310902-c400f54f-7b89-436c-aeda-e02f4c7ac12d.png)
 ![image](https://user-images.githubusercontent.com/111696729/191310934-bc5dfc66-a7eb-4b42-9513-ae17136028ea.png)
+![image](https://user-images.githubusercontent.com/111696729/191969919-a516d324-33ef-4956-a5d0-2e76773edb1d.png)
+![image](https://user-images.githubusercontent.com/111696729/191970273-4ea71592-a5af-47b3-b192-3d9d83b31d68.png)
 
 
 2. Create bucket S3
@@ -36,7 +39,7 @@ Building a Data Warehouse
 4. Create table in Redshift
 - go to Query editor
 
-![image](https://user-images.githubusercontent.com/111696729/191316157-948009cc-3f48-4868-ae10-444f8e8874bc.png)
+![image](https://user-images.githubusercontent.com/111696729/191968312-2e443d67-b540-421f-a906-30ba3106d54c.png)
 
 5. Insert data from copying json file with json_path
 
@@ -44,6 +47,8 @@ Building a Data Warehouse
 
 6. See the result from query data -> select * from staging_events
 
-![image](https://user-images.githubusercontent.com/111696729/191318891-9e90cc4a-0b6a-46c7-89bd-a41139f2a3f7.png)
+![image](https://user-images.githubusercontent.com/111696729/191967015-c06747ea-443c-4305-84dc-b6dfa3fab8c6.png)
+![image](https://user-images.githubusercontent.com/111696729/191965306-cbc7d6e4-1f40-41f6-9958-900c7e5c0c98.png)
+
 
 
