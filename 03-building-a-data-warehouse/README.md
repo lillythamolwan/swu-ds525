@@ -51,4 +51,3 @@ Building a Data Warehouse
 ![image](https://user-images.githubusercontent.com/111696729/191965306-cbc7d6e4-1f40-41f6-9958-900c7e5c0c98.png)
 
 
-
