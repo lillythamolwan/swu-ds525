@@ -28,4 +28,11 @@ with DAG(
 
     t1 >> echo_hello >> print_hey >> t2
 
+    # t1 >> echo_hello 
+    # t1 >> print_hey
+    # echo_hello >> t2
+    # print_hey  >> t2
+
+    # t1 >> [echo_hello, print_hey] >> t2
+
     
