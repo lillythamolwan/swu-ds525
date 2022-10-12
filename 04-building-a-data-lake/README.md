@@ -24,6 +24,8 @@ Building a Data Lake
 
 ![image](https://user-images.githubusercontent.com/111696729/195418294-0df28706-13c5-431d-8408-e18d05acda50.png)
 
+![image](https://user-images.githubusercontent.com/111696729/195422670-78c6370c-d86b-479c-81c6-33ca4acce7a9.png)
+
 ![image](https://user-images.githubusercontent.com/111696729/195421637-69260926-e1dd-4b87-b10a-2a0143a06dab.png)
 
 
