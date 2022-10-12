@@ -8,4 +8,4 @@ Building a Data Lake
   
   -> docker-compose up
 
-![image](https://user-images.githubusercontent.com/111696729/195400859-4daab07f-f36b-4286-9066-069541248ac4.png)
+
