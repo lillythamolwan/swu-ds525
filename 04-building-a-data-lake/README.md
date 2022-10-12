@@ -10,5 +10,6 @@ Building a Data Lake
 
 2. Follow below link
 
-![image](https://user-images.githubusercontent.com/111696729/195404501-220ac320-9925-4dd4-bafd-08e409a3a406.png)
+![image](https://user-images.githubusercontent.com/111696729/195407341-fb38ce9b-952e-414f-846f-cc06519529f4.png)
+
 
