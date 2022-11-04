@@ -1,3 +1,7 @@
 # Work
 output_csv/
 output_parquet/
+*.csv
+*.crc
+_SUCCESS
+logs
