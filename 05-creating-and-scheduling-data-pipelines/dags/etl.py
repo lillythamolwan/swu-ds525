@@ -123,7 +123,7 @@ def _process(**context):
 
 with DAG(
     "etl",
-    start_date=timezone.datetime(2022, 10, 15),
+    start_date=timezone.datetime(2022, 11, 8),
     schedule="@daily",
     tags=["workshop"],
     catchup=False,
