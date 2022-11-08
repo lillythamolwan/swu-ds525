@@ -2,9 +2,9 @@
 # Creating and Scheduling Data Pipelines
 
 เข้ามาที่โฟลเดอร์ 
-''' sh
+``` sh
 cd 05-creating-and-scheduling-data-pipelines
-'''
+```
 
 ถ้าใช้งานระบบที่เป็น Linux ให้เรารันคำสั่งด้านล่างนี้ก่อน
 
