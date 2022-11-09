@@ -25,4 +25,32 @@ image.png
 
 **หมายเหตุ:** จริง ๆ แล้วเราสามารถเอาโฟลเดอร์ `data` ไว้ที่ไหนก็ได้ที่ Airflow ที่เรารันเข้าถึงได้ แต่เพื่อความง่ายสำหรับโปรเจคนี้ เราจะนำเอาโฟลเดอร์ `data` ไว้ในโฟลเดอร์ `dags` เลย
 
-![image](https://user-images.githubusercontent.com/111696729/200621254-a3526b62-5f2e-4816-b82f-6058411b1c77.png)
+สร้าง connection ที่ Airflow จากนั้นกด test เพื่อทดสอบและกด save
+![airflow](airflow.jpg)
+
+เขียนคำสั่งไฟล์ etl.py เพื่อสร้างชุดคำสั่ง และกำหนดช่วงเวลาในการรันคำสั่ง
+![etl5](etl5.jpg)
+
+Activate etl workshop
+![dags](dags.jpg)
+
+![graph](graph.jpg)
+
+ทดสอบ query ข้อมูลตารางที่เราสร้างไว้ คำสั่งเข้าไปที่ Postgres database
+
+```sh
+psql -h localhost -d postgres -U postgres
+```
+พิมพ์คำสั่งแสดงชื่อตาราง
+```sh
+\dt
+```
+![showtb](showtb.jpg)
+
+พิมพ์คำสั่ง query ข้อมูลตารางที่ต้องการ
+```sh
+select * from actors;
+select * from events;
+```
+![actors](actors.jpg)
+![events](events.jpg)
