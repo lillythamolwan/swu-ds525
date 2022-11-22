@@ -13,5 +13,5 @@ exposures:
       - ref('completed_orders')
 
     owner:
-      name: Thamolwan Thiraumpornkul
-      email: thamolwan.thi@g.swu.ac.th
+      name: Kan Ouivirach
+      email: kan@odds.team
