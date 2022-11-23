@@ -14,11 +14,14 @@ Pass : admin
 Test Query on SQLPad
 ![sqlpad_query_graph](sqlpad_query_graph.jpg)
 
-Open new terminal
+Open new terminal -> เข้าไปที่ 
 cd 06-analytics-engineering
+
+```sh
 python -m venv ENV
 source ENV/bin/activate
 pip install -r requirements.txt
+```
 
 Test dbt connection # ทดสอบ connection กับ profiles
 
@@ -26,8 +29,6 @@ Test dbt connection # ทดสอบ connection กับ profiles
 cd jaffle
 dbt debug
 ```
-
-mkdir -p ~/.dbt
 
 Create a dbt project
 
@@ -40,7 +41,7 @@ Edit the dbt profiles
 ```sh
 code ~/.dbt/profiles.yml
 ```
-
+set ค่าในไฟล์ profiles ดังนี้
 ```yml
 jaffle:
   outputs:
@@ -81,11 +82,16 @@ You should see "All checks passed!".
 ```sh
 dbt run
 ```
+
 Create folder staging/jaffle and marts
 
 II. Set up Source
+
 2.1 Folder staging สรา้งไฟล์ stg_jaffle__customers.sql 
+
 -- เขียนคำสั่ง CTE => Common Table Expression เพื่อประกาศตัวแปร 
+
+```sh
 with
 
 source as (
@@ -105,8 +111,11 @@ source as (
 )
 
 select * from final
+```
 
 2.2 Folder staging สรา้งไฟล์ stg_jaffle__orders.sql 
+
+```sh
 with
 
 source as (
@@ -128,8 +137,11 @@ source as (
 )
 
 select * from final
+```
 
 2.3 Folder staging สรา้งไฟล์ stg_jaffle__stripe_payments.sql 
+
+```sh
 with
 
 source as (
@@ -153,7 +165,8 @@ source as (
 )
 
 select * from final
-dbt run
+```
+
 
 ![query_stripe_payment](query_stripe_payment.jpg)
 
@@ -179,8 +192,9 @@ dbt docs serve
 ```
 ![dbt_overview](dbt_overview.jpg)
 
-3. Marts
-3.1 ย้ายไฟล์ completed_orders.sql ไวใ้น marts/sales 
+III. marts
+
+3.1 ย้ายไฟล์ completed_orders.sql ไปไว้ใน marts/sales 
 ```sh
 with
 int_orders_customers_joined as (
@@ -280,7 +294,6 @@ exposures:
       name: Kan Ouivirach
       email: kan@odds.team
   ```
-![dbt_lineage_graph](dbt_lineage_graph.jpg)
 
 3.5 ตรวจสอบไฟล์
 assert_completed_orders_should_have_only_completed_status.sql ใน tests
@@ -289,3 +302,7 @@ select
 status
 from "postgres"."public"."completed_orders"
 where status != 'completed'
+```
+
+![dbt_lineage_graph](dbt_lineage_graph.jpg)
+![exit_terminal](exit_terminal.jpg)
