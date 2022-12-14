@@ -71,6 +71,7 @@ copy_table_queries = [
     REGION 'us-east-1'
     """,
 ]
+
 insert_table_queries = [
 """
     INSERT INTO Repo (id,name,url) 

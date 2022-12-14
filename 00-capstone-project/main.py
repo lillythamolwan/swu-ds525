@@ -4,7 +4,6 @@ aws_access_key_id = ""
 aws_secret_access_key = ""
 aws_session_token = ""
 
-
 #client = boto3.client(
 #    "s3",
 #    aws_access_key_id=aws_access_key_id,
@@ -29,4 +28,10 @@ s3.meta.client.upload_file(
     "product.csv",
     "lillythamolwan-titanic",
     "product.csv",
+)
+
+s3.meta.client.upload_file(
+    "hh_demographic.csv",
+    "lillythamolwan-titanic",
+    "hh_demographic.csv",
 )
