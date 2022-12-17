@@ -60,6 +60,7 @@ create_table_query = [
     """
     CREATE TABLE IF NOT EXISTS sales (
         household_key int,
+        BASKET_ID bigint,
         PRODUCT_ID int,
         SALES_VALUE decimal,
         STORE_ID int,
@@ -121,6 +122,7 @@ insert_dwh_queries = [
     INSERT INTO sales
     SELECT transaction_data.household_key,
         transaction_data.PRODUCT_ID,
+        BASKET_ID,
         SALES_VALUE,
         STORE_ID,
         WEEK_NO,
