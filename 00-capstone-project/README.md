@@ -8,7 +8,10 @@ cd 00-capstone-project
 python -m venv ENV
 source ENV/bin/activate
 pip install -r requirements.txt
+python main.py
+Upload data source to datalake (S3) เข้าไปเก็บที่ Bucket เรียบร้อยแล้ว ทำการ สร้างตาราง copy insert ข้อมูลไปที่ redshift > ไฟล์ etl.py
 
+python etl.py
 cd try_redshift
 code ~/.dbt/profiles.yml
 ทำการตั้งค่า profile redshift
@@ -27,3 +30,5 @@ try_redshift:
       schema: public
 
   target: dev
+ทดสอบ connection คำสั่ง
+  dbt debug

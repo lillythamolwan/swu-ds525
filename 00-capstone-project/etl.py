@@ -1,17 +1,8 @@
 import psycopg2
 
-def main():
-    host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
-    dbname = "dev"
-    user = "awsuser"
-    password = "Lilly2022"
-    port = "5439"
-    conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
-    conn = psycopg2.connect(conn_str)
-    cur = conn.cursor()
     
 #Drop table ใช้สำหรับล้าง Table เดิมเพื่อรันในครั้งต่อไป
-    drop_table_queries = [
+drop_table_queries = [
     "DROP TABLE IF EXISTS transaction_data",
     "DROP TABLE IF EXISTS product",
     "DROP TABLE IF EXISTS hh_demographic",
@@ -20,11 +11,11 @@ def main():
 ]
 
 # Create table
-    create_table_query = [
+create_table_query = [
     """
     CREATE TABLE IF NOT EXISTS transaction_data (
         household_key int,
-        BASKET_ID int,
+        BASKET_ID bigint,
         DAY int,
         PRODUCT_ID int, 
         QUANTITY int,
@@ -85,57 +76,51 @@ def main():
     """
 ]
 
-    cur.execute(create_table_query)
-    conn.commit()
 
 # Copy data from S3 to the table we created above
-    copy_table_query = """
+copy_table_query = [ """
     COPY transaction_data FROM 's3://lillythamolwan-titanic/transaction_data.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOPBQBY6N'
-    SECRET_ACCESS_KEY 'BrRNa3NEvgQMJcLB2hkPm73CK+NpdqnLasiJuVnX'
-    SESSION_TOKEN 'FwoGZXIvYXdzEPD//////////wEaDErk3focojBIrYFhtSLKAVrxF2uz8+NXjKVGDuxngA6lsfAtKqhxlCVGArook8IIK6oH1xsZxaKimppWHsZGP1sUbUSElIvEJ2T3S2+h1KNkoPDDkDdZO8tZ5qGRnvuzORhSyxN4VWBpeIC112y0gqVAH4BUT8zdAoaSCLTnZESZomsniyxuT7C3PxJeiwJAYDnmsS7U95CWBFEhO1rw2r/1W9s/wFAQZYPYunBzvvVgqnsOjkLvuPXPNdQI4WDzwEkgL5nkO3TgOE+sajFqbV3rk8rpF8LHIjYou/3xnAYyLQoJpAgdeligyBg51zI1Spcd6I6vBAfPTYx2chOhfhPnySJFwM39NjnB1LZNrA=='
+    ACCESS_KEY_ID 'ASIAYXMWM46LOV2L5FOJ'
+    SECRET_ACCESS_KEY 'hCSfj9QA2s5iEQaWDhrN0hjxcHzqd+MaJRHhgn/z'
+    SESSION_TOKEN 'FwoGZXIvYXdzEAMaDCm8t184+uAeMH6RjCLKAaMe5hgpnWQY/b/do1xFnjS13e8mR50kZGtw7qD81vEegS+9dOkOU1PF1ohPLhixqqdy+f0Gp8E56OaGEN5drYrhoPm4jLsTRnkHr3sGEbDq5cFin3P50V8nBqq8m9dkmbegAGWg9VIEqvMTBY4pLf8ZXHIcUM/fLYmtgaA6omvzF0xxNjNspW73X0ocm7mWNxNFzmL9zJp7oi7vwnYmM44NYBzOgmnO7k2zDFfY2UFIQYLMoNUkZOX//6oCxotC4QL6vyBLUlRCGdko7JT2nAYyLb1KKwQXrN6uupX/kWez1qiaazPtxBC9zLgATBPnxesmD6WalmPGTZRSIHt06A=='
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
     """
     COPY product FROM 's3://lillythamolwan-titanic/product.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOPBQBY6N'
-    SECRET_ACCESS_KEY 'BrRNa3NEvgQMJcLB2hkPm73CK+NpdqnLasiJuVnX'
-    SESSION_TOKEN 'FwoGZXIvYXdzEPD//////////wEaDErk3focojBIrYFhtSLKAVrxF2uz8+NXjKVGDuxngA6lsfAtKqhxlCVGArook8IIK6oH1xsZxaKimppWHsZGP1sUbUSElIvEJ2T3S2+h1KNkoPDDkDdZO8tZ5qGRnvuzORhSyxN4VWBpeIC112y0gqVAH4BUT8zdAoaSCLTnZESZomsniyxuT7C3PxJeiwJAYDnmsS7U95CWBFEhO1rw2r/1W9s/wFAQZYPYunBzvvVgqnsOjkLvuPXPNdQI4WDzwEkgL5nkO3TgOE+sajFqbV3rk8rpF8LHIjYou/3xnAYyLQoJpAgdeligyBg51zI1Spcd6I6vBAfPTYx2chOhfhPnySJFwM39NjnB1LZNrA=='
+    ACCESS_KEY_ID 'ASIAYXMWM46LOV2L5FOJ'
+    SECRET_ACCESS_KEY 'hCSfj9QA2s5iEQaWDhrN0hjxcHzqd+MaJRHhgn/z'
+    SESSION_TOKEN 'FwoGZXIvYXdzEAMaDCm8t184+uAeMH6RjCLKAaMe5hgpnWQY/b/do1xFnjS13e8mR50kZGtw7qD81vEegS+9dOkOU1PF1ohPLhixqqdy+f0Gp8E56OaGEN5drYrhoPm4jLsTRnkHr3sGEbDq5cFin3P50V8nBqq8m9dkmbegAGWg9VIEqvMTBY4pLf8ZXHIcUM/fLYmtgaA6omvzF0xxNjNspW73X0ocm7mWNxNFzmL9zJp7oi7vwnYmM44NYBzOgmnO7k2zDFfY2UFIQYLMoNUkZOX//6oCxotC4QL6vyBLUlRCGdko7JT2nAYyLb1KKwQXrN6uupX/kWez1qiaazPtxBC9zLgATBPnxesmD6WalmPGTZRSIHt06A=='
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
     """
     COPY hh_demographic FROM 's3://lillythamolwan-titanic/hh_demographic.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOPBQBY6N'
-    SECRET_ACCESS_KEY 'BrRNa3NEvgQMJcLB2hkPm73CK+NpdqnLasiJuVnX'
-    SESSION_TOKEN 'FwoGZXIvYXdzEPD//////////wEaDErk3focojBIrYFhtSLKAVrxF2uz8+NXjKVGDuxngA6lsfAtKqhxlCVGArook8IIK6oH1xsZxaKimppWHsZGP1sUbUSElIvEJ2T3S2+h1KNkoPDDkDdZO8tZ5qGRnvuzORhSyxN4VWBpeIC112y0gqVAH4BUT8zdAoaSCLTnZESZomsniyxuT7C3PxJeiwJAYDnmsS7U95CWBFEhO1rw2r/1W9s/wFAQZYPYunBzvvVgqnsOjkLvuPXPNdQI4WDzwEkgL5nkO3TgOE+sajFqbV3rk8rpF8LHIjYou/3xnAYyLQoJpAgdeligyBg51zI1Spcd6I6vBAfPTYx2chOhfhPnySJFwM39NjnB1LZNrA=='
+    ACCESS_KEY_ID 'ASIAYXMWM46LOV2L5FOJ'
+    SECRET_ACCESS_KEY 'hCSfj9QA2s5iEQaWDhrN0hjxcHzqd+MaJRHhgn/z'
+    SESSION_TOKEN 'FwoGZXIvYXdzEAMaDCm8t184+uAeMH6RjCLKAaMe5hgpnWQY/b/do1xFnjS13e8mR50kZGtw7qD81vEegS+9dOkOU1PF1ohPLhixqqdy+f0Gp8E56OaGEN5drYrhoPm4jLsTRnkHr3sGEbDq5cFin3P50V8nBqq8m9dkmbegAGWg9VIEqvMTBY4pLf8ZXHIcUM/fLYmtgaA6omvzF0xxNjNspW73X0ocm7mWNxNFzmL9zJp7oi7vwnYmM44NYBzOgmnO7k2zDFfY2UFIQYLMoNUkZOX//6oCxotC4QL6vyBLUlRCGdko7JT2nAYyLb1KKwQXrN6uupX/kWez1qiaazPtxBC9zLgATBPnxesmD6WalmPGTZRSIHt06A=='
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
     """
     COPY status FROM 's3://lillythamolwan-titanic/status.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOPBQBY6N'
-    SECRET_ACCESS_KEY 'BrRNa3NEvgQMJcLB2hkPm73CK+NpdqnLasiJuVnX'
-    SESSION_TOKEN 'FwoGZXIvYXdzEPD//////////wEaDErk3focojBIrYFhtSLKAVrxF2uz8+NXjKVGDuxngA6lsfAtKqhxlCVGArook8IIK6oH1xsZxaKimppWHsZGP1sUbUSElIvEJ2T3S2+h1KNkoPDDkDdZO8tZ5qGRnvuzORhSyxN4VWBpeIC112y0gqVAH4BUT8zdAoaSCLTnZESZomsniyxuT7C3PxJeiwJAYDnmsS7U95CWBFEhO1rw2r/1W9s/wFAQZYPYunBzvvVgqnsOjkLvuPXPNdQI4WDzwEkgL5nkO3TgOE+sajFqbV3rk8rpF8LHIjYou/3xnAYyLQoJpAgdeligyBg51zI1Spcd6I6vBAfPTYx2chOhfhPnySJFwM39NjnB1LZNrA=='
+    ACCESS_KEY_ID 'ASIAYXMWM46LOV2L5FOJ'
+    SECRET_ACCESS_KEY 'hCSfj9QA2s5iEQaWDhrN0hjxcHzqd+MaJRHhgn/z'
+    SESSION_TOKEN 'FwoGZXIvYXdzEAMaDCm8t184+uAeMH6RjCLKAaMe5hgpnWQY/b/do1xFnjS13e8mR50kZGtw7qD81vEegS+9dOkOU1PF1ohPLhixqqdy+f0Gp8E56OaGEN5drYrhoPm4jLsTRnkHr3sGEbDq5cFin3P50V8nBqq8m9dkmbegAGWg9VIEqvMTBY4pLf8ZXHIcUM/fLYmtgaA6omvzF0xxNjNspW73X0ocm7mWNxNFzmL9zJp7oi7vwnYmM44NYBzOgmnO7k2zDFfY2UFIQYLMoNUkZOX//6oCxotC4QL6vyBLUlRCGdko7JT2nAYyLb1KKwQXrN6uupX/kWez1qiaazPtxBC9zLgATBPnxesmD6WalmPGTZRSIHt06A=='
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
-
-    cur.execute(copy_table_query)
-    conn.commit()
-
-    conn.close()
+]
 
 insert_dwh_queries = [
     """
     INSERT INTO sales
-    SELECT household_key,
-        PRODUCT_ID,
+    SELECT transaction_data.household_key,
+        transaction_data.PRODUCT_ID,
         SALES_VALUE,
         STORE_ID,
         WEEK_NO,
@@ -155,23 +140,16 @@ def drop_tables(cur, conn):
 
 
 def create_tables(cur, conn):
-    for query in create_table_queries:
+    for query in create_table_query:
         cur.execute(query)
         conn.commit()
 
-
-def _load_staging_tables():
-    for query in copy_table_queries:
-        cur.execute(query.format(curr_date, access_key_id, secret_access_key, session_token))
-        conn.commit()
-
-
-def insert_tables(cur, conn):
-    for query in insert_table_queries:
+def copy_table (cur, conn):
+    for query in copy_table_query :
         cur.execute(query)
         conn.commit()
 
-def _insert_dwh_tables():
+def _insert_dwh_tables(cur, conn):
     for query in insert_dwh_queries:
         cur.execute(query)
         conn.commit()
@@ -180,26 +158,18 @@ def main():
     host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
     dbname = "dev"
     user = "awsuser"
-    password = "Lilly230922"
+    password = "Lilly2022"
     port = "5439"
     conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
     conn = psycopg2.connect(conn_str)
     cur = conn.cursor()
 
-    #drop_tables(cur, conn)
-    #create_tables(cur, conn)
-    #load_staging_tables(cur, conn)
-    #insert_tables(cur, conn)
+    drop_tables(cur, conn)
+    create_tables(cur, conn) 
+    copy_table(cur, conn) 
+    _insert_dwh_tables(cur, conn)
 
-    # query data
-    query = "select * from staging_events"
-    cur.execute(query)
-    # print data
-    records = cur.fetchall()
-    for row in records:
-        print(row)
     conn.close()
-
 
 if __name__ == "__main__":
     main()
