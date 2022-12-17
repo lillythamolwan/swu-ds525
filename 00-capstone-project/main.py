@@ -1,8 +1,8 @@
 import boto3
 
-aws_access_key_id = "ASIAYXMWM46LOPBQBY6N"
-aws_secret_access_key = "BrRNa3NEvgQMJcLB2hkPm73CK+NpdqnLasiJuVnX"
-aws_session_token = "FwoGZXIvYXdzEPD//////////wEaDErk3focojBIrYFhtSLKAVrxF2uz8+NXjKVGDuxngA6lsfAtKqhxlCVGArook8IIK6oH1xsZxaKimppWHsZGP1sUbUSElIvEJ2T3S2+h1KNkoPDDkDdZO8tZ5qGRnvuzORhSyxN4VWBpeIC112y0gqVAH4BUT8zdAoaSCLTnZESZomsniyxuT7C3PxJeiwJAYDnmsS7U95CWBFEhO1rw2r/1W9s/wFAQZYPYunBzvvVgqnsOjkLvuPXPNdQI4WDzwEkgL5nkO3TgOE+sajFqbV3rk8rpF8LHIjYou/3xnAYyLQoJpAgdeligyBg51zI1Spcd6I6vBAfPTYx2chOhfhPnySJFwM39NjnB1LZNrA=="
+aws_access_key_id = "ASIAYXMWM46LDYEIP64Q"
+aws_secret_access_key = "4fzb9wMYQR1Pi8Sj2ngxsiX7GnZP4TIf0hcMGUpq"
+aws_session_token = "FwoGZXIvYXdzEAIaDEZeK+Fx++4NPtNDQCLKAbfbkmB4oTIVyx6w6Crd+hi5SzhODH1EGnajzT/PC2AUznEKHzRhhhZPElTxtbdRLOaX80FZoel6ldMM8T0La8OLpsHzj/7lJPT+1ymRR6cyPy1zMfj8aprtnhxCRARWNScuoKpRNY1g1coJnGElUrfV0Po7l4P+NwlIDfLWzh/bh075ZdrwKJH3xPIear7wBqGI5nOzuFvNztrfOFLNB5DkgvpeZ4DfJbV3w9+WSr8Z6cpmUZ6j+kk8Xn7nTWiLO3eyv+nNPmUAUrkolIv2nAYyLRDWymbePpGqwDeYuzRMus0D2Xn+iTv/9kdhZUYGV4SbGzvDSjVuA/pKaEsGEA=="
 
 #client = boto3.client(
 #    "s3",
@@ -36,49 +36,8 @@ s3.meta.client.upload_file(
     "hh_demographic.csv",
 )
 
-import psycopg2
-
-
-def main():
-    host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
-    dbname = "dev"
-    user = "awsuser"
-    password = "Lilly2022"
-    port = "5439"
-    conn_str = f"host={host} dbname={dbname} user={user} password={password} port={port}"
-    conn = psycopg2.connect(conn_str)
-    cur = conn.cursor()
-    
-    # Drop table if it exists
-    drop_table_query = "DROP TABLE IF EXISTS sales"
-    cur.execute(drop_table_query)
-    conn.commit()
-
-    # Create table
-    create_table_query = """
-    CREATE TABLE IF NOT EXISTS sales (
-        STORE_ID INT PRIMARY KEY, 
-        SALES_VALUE FLOAT 
-    )
-    """
-    cur.execute(create_table_query)
-    conn.commit()
-
-    # Copy data from S3 to the table we created above
-    copy_table_query = """
-    COPY sales FROM 's3://lillythamolwan-titanic/transaction_data.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOPBQBY6N'
-    SECRET_ACCESS_KEY 'BrRNa3NEvgQMJcLB2hkPm73CK+NpdqnLasiJuVnX'
-    SESSION_TOKEN 'FwoGZXIvYXdzEPD//////////wEaDErk3focojBIrYFhtSLKAVrxF2uz8+NXjKVGDuxngA6lsfAtKqhxlCVGArook8IIK6oH1xsZxaKimppWHsZGP1sUbUSElIvEJ2T3S2+h1KNkoPDDkDdZO8tZ5qGRnvuzORhSyxN4VWBpeIC112y0gqVAH4BUT8zdAoaSCLTnZESZomsniyxuT7C3PxJeiwJAYDnmsS7U95CWBFEhO1rw2r/1W9s/wFAQZYPYunBzvvVgqnsOjkLvuPXPNdQI4WDzwEkgL5nkO3TgOE+sajFqbV3rk8rpF8LHIjYou/3xnAYyLQoJpAgdeligyBg51zI1Spcd6I6vBAfPTYx2chOhfhPnySJFwM39NjnB1LZNrA=='
-    CSV
-    IGNOREHEADER 1
-    REGION 'us-east-1'
-    """
-    cur.execute(copy_table_query)
-    conn.commit()
-
-    conn.close()
-
-
-if __name__ == "__main__":
-    main()
+s3.meta.client.upload_file(
+    "status.csv",
+    "lillythamolwan-titanic",
+    "status.csv",
+)
