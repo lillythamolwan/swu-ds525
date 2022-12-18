@@ -13,7 +13,8 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 ```
 
-- go to AWS Learner Lab และที่ Terminal ให้เราพิมพ์คำสั่ง cat ~/.aws/credentials ลงไป จะได้ค่าทั้ง 3 ค่า ตามรูปด้านล่างนี้
+- go to AWS Learner Lab และที่ Terminal ให้เราพิมพ์คำสั่ง 
+ ลงไป จะได้ค่าทั้ง 3 ค่า ตามรูปด้านล่างนี้
 access_key_id
 secret_access_key
 session_token
@@ -26,24 +27,14 @@ python main.py
 ```
 ![s3_buckets](s3_buckets.jpg)
 
-2. ทำการสร้างตาราง copy insert ข้อมูลไปยัง DWH  -> redshift -> ไฟล์ etl.py
+2. สร้าง cluster บน redshift โดยต้อง turn on publicly accessible 
+![redshift_turnon_public](redshift_turnon_public.jpg)
+![redshift_turnon_save](redshift_turnon_save.jpg)
+
+
+3. ทำการสร้างตาราง copy insert ข้อมูลไปยัง DWH  -> redshift -> ไฟล์ etl.py
 ```sh
 python etl.py
-```
-#Optional ถ้าใช้งาน dbt กับ redshift
-```sh
-pip install dbt-core dbt-redshift
-```
-สร้างโปรเจค dbt 
-```sh
-dbt init
-```
-ตั้งชื่อโปรเจคว่า : try_redshift
-
-จากนั้นเข้าไปที่โปรเจค try_redshift
-```sh
-cd try_redshift
-code ~/.dbt/profiles.yml
 ```
 ตั้งค่า profile redshift
 ```sh
@@ -61,6 +52,22 @@ try_redshift:
       schema: public
 
   target: dev
+```
+
+#Optional ถ้าใช้งาน dbt กับ redshift
+```sh
+pip install dbt-core dbt-redshift
+```
+สร้างโปรเจค dbt 
+```sh
+dbt init
+```
+ตั้งชื่อโปรเจคว่า : try_redshift
+
+จากนั้นเข้าไปที่โปรเจค try_redshift
+```sh
+cd try_redshift
+code ~/.dbt/profiles.yml
 ```
 #Optional ทดสอบ connection คำสั่ง
   dbt debug
