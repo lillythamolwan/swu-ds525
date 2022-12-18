@@ -1,21 +1,51 @@
-Capstone Project DS525 Data Engineering
-1. Upload data source to datalake (S3)
-- ไปที่ AWS Learner Lab และที่ Terminal ให้เราพิมพ์คำสั่ง cat ~/.aws/credentials ลงไป จะได้ค่าทั้ง 3 ค่า ที่ต้องการมา ตามรูปด้านล่างนี้
-![credential_aws](credential_aws.jpg)
+Capstone Project -> DS525 Data Warehose and Business Intelligence
+1. Upload data source csv file to datalake (S3)
+- open gitpod 
+- Prepare environment
 
-กลับมาที่ gitpod สั่ง
-cd 00-capstone-project
+```sh
+cd 00-capstone-project and install library boto3
 python -m venv ENV
 source ENV/bin/activate
+pip install boto3
+pip freeze
+pip freeze > requirements.txt
 pip install -r requirements.txt
-python main.py
-Upload data source to datalake (S3) เข้าไปเก็บที่ Bucket เรียบร้อยแล้ว ทำการ สร้างตาราง copy insert ข้อมูลไปที่ redshift > ไฟล์ etl.py
+```
 
+- go to AWS Learner Lab และที่ Terminal ให้เราพิมพ์คำสั่ง cat ~/.aws/credentials ลงไป จะได้ค่าทั้ง 3 ค่า ตามรูปด้านล่างนี้
+access_key_id
+secret_access_key
+session_token
+
+![credential_aws](credential_aws.jpg)
+
+- go to gitpod ทำการสร้าง file main.py เพื่อเชื่อมต่อกับ S3
+```sh
+python main.py
+```
+![s3_buckets](s3_buckets.jpg)
+
+2. ทำการสร้างตาราง copy insert ข้อมูลไปยัง DWH  -> redshift -> ไฟล์ etl.py
+```sh
 python etl.py
+```
+#Optional ถ้าใช้งาน dbt กับ redshift
+```sh
+pip install dbt-core dbt-redshift
+```
+สร้างโปรเจค dbt 
+```sh
+dbt init
+```
+ตั้งชื่อโปรเจคว่า : try_redshift
+
 cd try_redshift
 code ~/.dbt/profiles.yml
-ทำการตั้งค่า profile redshift
+```
 
+ตั้งค่า profile redshift
+```sh
 try_redshift:
   outputs:
 
@@ -30,5 +60,7 @@ try_redshift:
       schema: public
 
   target: dev
-ทดสอบ connection คำสั่ง
+```
+#ทดสอบ connection คำสั่ง
   dbt debug
+
