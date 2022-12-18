@@ -32,11 +32,30 @@ python main.py
 ![redshift_turnon_save](redshift_turnon_save.jpg)
 
 
-3. ทำการสร้างตาราง copy insert ข้อมูลไปยัง DWH  -> redshift -> ไฟล์ etl.py
+3. ทำการสร้างตาราง copy, insert, Transform ข้อมูลไปยัง DWH (redshift) -> ไฟล์ etl.py
+![join](join.jpg)
+
 ```sh
 python etl.py
 ```
-ตั้งค่า profile redshift
+ทดสอบ query บน redshift
+![sales_table](sales_table.jpg)
+
+#Optional ถ้าใช้งาน dbt กับ redshift
+```sh
+pip install dbt-core dbt-redshift
+```
+สร้างโปรเจค dbt 
+```sh
+dbt init
+```
+ตั้งชื่อโปรเจคว่า : try_redshift
+จากนั้นเข้าไปที่โปรเจค try_redshift
+```sh
+cd try_redshift
+code ~/.dbt/profiles.yml
+```
+ตั้งค่า profiles
 ```sh
 try_redshift:
   outputs:
@@ -53,22 +72,8 @@ try_redshift:
 
   target: dev
 ```
-
-#Optional ถ้าใช้งาน dbt กับ redshift
-```sh
-pip install dbt-core dbt-redshift
-```
-สร้างโปรเจค dbt 
-```sh
-dbt init
-```
-ตั้งชื่อโปรเจคว่า : try_redshift
-
-จากนั้นเข้าไปที่โปรเจค try_redshift
-```sh
-cd try_redshift
-code ~/.dbt/profiles.yml
-```
 #Optional ทดสอบ connection คำสั่ง
   dbt debug
+
+
 

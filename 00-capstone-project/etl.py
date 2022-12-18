@@ -81,36 +81,36 @@ create_table_query = [
 # Copy data from S3 to the table we created above
 copy_table_query = [ """
     COPY transaction_data FROM 's3://lillythamolwan-titanic/transaction_data.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOD7FWLHI'
-    SECRET_ACCESS_KEY 'o4M+3LmtwyoVxUjTyTz5XBQPy/nh0emPS2j9a9Oi'
-    SESSION_TOKEN 'FwoGZXIvYXdzEB0aDN8bybirReyfpZXmLCLKAaim9wDJwxxibvX5fnQEelERSgU3B8OgAGcrjJ4GghLP0X/Ccp/hyZ+CGYnBgKqwz1swVWAMpqgBQDxeclzHgQHHt9hbMEjdzLbJIEHRBxJvabGzZu3jzW35tHe9KDgHidIF0DjJNgwYlJsDNZjaf/JBA3OFZuqCMXYzwmfJ9AZRLgqplnLvrM72qA1zq/vkt9t6u7wl/jxigjdM73plj5GTn12R8vpe+mFJ2F2+Kf2YDInC/pM+ciNkhzVzdwc7ErTd0emUX7gWF44o9+37nAYyLRqKLPtBOEWXcDFw/KyM7ikw6dwxL6ZAKHvqLA4zvvWIS6sO3Bq0+PU8F9cY5A=='
+    ACCESS_KEY_ID '1'
+    SECRET_ACCESS_KEY '2'
+    SESSION_TOKEN '3'
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
     """
     COPY product FROM 's3://lillythamolwan-titanic/product.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOD7FWLHI'
-    SECRET_ACCESS_KEY 'o4M+3LmtwyoVxUjTyTz5XBQPy/nh0emPS2j9a9Oi'
-    SESSION_TOKEN 'FwoGZXIvYXdzEB0aDN8bybirReyfpZXmLCLKAaim9wDJwxxibvX5fnQEelERSgU3B8OgAGcrjJ4GghLP0X/Ccp/hyZ+CGYnBgKqwz1swVWAMpqgBQDxeclzHgQHHt9hbMEjdzLbJIEHRBxJvabGzZu3jzW35tHe9KDgHidIF0DjJNgwYlJsDNZjaf/JBA3OFZuqCMXYzwmfJ9AZRLgqplnLvrM72qA1zq/vkt9t6u7wl/jxigjdM73plj5GTn12R8vpe+mFJ2F2+Kf2YDInC/pM+ciNkhzVzdwc7ErTd0emUX7gWF44o9+37nAYyLRqKLPtBOEWXcDFw/KyM7ikw6dwxL6ZAKHvqLA4zvvWIS6sO3Bq0+PU8F9cY5A=='
+   ACCESS_KEY_ID '1'
+    SECRET_ACCESS_KEY '2'
+    SESSION_TOKEN '3'
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
     """
     COPY hh_demographic FROM 's3://lillythamolwan-titanic/hh_demographic.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOD7FWLHI'
-    SECRET_ACCESS_KEY 'o4M+3LmtwyoVxUjTyTz5XBQPy/nh0emPS2j9a9Oi'
-    SESSION_TOKEN 'FwoGZXIvYXdzEB0aDN8bybirReyfpZXmLCLKAaim9wDJwxxibvX5fnQEelERSgU3B8OgAGcrjJ4GghLP0X/Ccp/hyZ+CGYnBgKqwz1swVWAMpqgBQDxeclzHgQHHt9hbMEjdzLbJIEHRBxJvabGzZu3jzW35tHe9KDgHidIF0DjJNgwYlJsDNZjaf/JBA3OFZuqCMXYzwmfJ9AZRLgqplnLvrM72qA1zq/vkt9t6u7wl/jxigjdM73plj5GTn12R8vpe+mFJ2F2+Kf2YDInC/pM+ciNkhzVzdwc7ErTd0emUX7gWF44o9+37nAYyLRqKLPtBOEWXcDFw/KyM7ikw6dwxL6ZAKHvqLA4zvvWIS6sO3Bq0+PU8F9cY5A=='
+    ACCESS_KEY_ID '1'
+    SECRET_ACCESS_KEY '2'
+    SESSION_TOKEN '3'
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
     """
     COPY status FROM 's3://lillythamolwan-titanic/status.csv'
-    ACCESS_KEY_ID 'ASIAYXMWM46LOD7FWLHI'
-    SECRET_ACCESS_KEY 'o4M+3LmtwyoVxUjTyTz5XBQPy/nh0emPS2j9a9Oi'
-    SESSION_TOKEN 'FwoGZXIvYXdzEB0aDN8bybirReyfpZXmLCLKAaim9wDJwxxibvX5fnQEelERSgU3B8OgAGcrjJ4GghLP0X/Ccp/hyZ+CGYnBgKqwz1swVWAMpqgBQDxeclzHgQHHt9hbMEjdzLbJIEHRBxJvabGzZu3jzW35tHe9KDgHidIF0DjJNgwYlJsDNZjaf/JBA3OFZuqCMXYzwmfJ9AZRLgqplnLvrM72qA1zq/vkt9t6u7wl/jxigjdM73plj5GTn12R8vpe+mFJ2F2+Kf2YDInC/pM+ciNkhzVzdwc7ErTd0emUX7gWF44o9+37nAYyLRqKLPtBOEWXcDFw/KyM7ikw6dwxL6ZAKHvqLA4zvvWIS6sO3Bq0+PU8F9cY5A=='
+    ACCESS_KEY_ID '1'
+    SECRET_ACCESS_KEY '2'
+    SESSION_TOKEN '3'
     CSV
     IGNOREHEADER 1
     REGION 'us-east-1'
@@ -157,7 +157,7 @@ def _insert_dwh_tables(cur, conn):
         conn.commit()
 
 def main():
-    host = "redshift-cluster-1.cxmo4um5uuoa.us-east-1.redshift.amazonaws.com"
+    host = "Endpoint"
     dbname = "dev"
     user = "awsuser"
     password = "Lilly2022"
