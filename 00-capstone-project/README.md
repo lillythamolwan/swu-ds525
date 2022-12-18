@@ -40,10 +40,11 @@ dbt init
 ```
 ตั้งชื่อโปรเจคว่า : try_redshift
 
+จากนั้นเข้าไปที่โปรเจค try_redshift
+```sh
 cd try_redshift
 code ~/.dbt/profiles.yml
 ```
-
 ตั้งค่า profile redshift
 ```sh
 try_redshift:
@@ -61,6 +62,6 @@ try_redshift:
 
   target: dev
 ```
-#ทดสอบ connection คำสั่ง
+#Optional ทดสอบ connection คำสั่ง
   dbt debug
 
