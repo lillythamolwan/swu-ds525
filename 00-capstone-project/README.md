@@ -20,7 +20,7 @@ session_token
 
 ![credential_aws](credential_aws.jpg)
 
-- go to gitpod ทำการสร้างและรันไฟล์ main.py เพื่อเชื่อมต่อกับ Buckets ใน S3 
+- go to gitpod ทำการสร้างและรันไฟล์ main.py เพื่อเชื่อมต่อกับ Buckets ใน S3 ซึ่งเป็น Data Storage ที่สามารถจัดเก็บข้อมูลการซื้อขายจำนวนมากได้ สามารถกำหนดสิทธิให้แก่ user มีความปลอดภัยในการเข้าถึงข้อมูล Reliability น่าเชื่อถือ และมีบริการทั่วทุกมุมโลก 
 ```sh
 python main.py
 ```
@@ -30,7 +30,7 @@ python main.py
 ![redshift_turnon_public](redshift_turnon_public.jpg)
 ![redshift_turnon_save](redshift_turnon_save.jpg)
 
-3. ทำการสร้างตาราง copy, insert, Transform ข้อมูลไปยัง DWH (redshift) -> ไฟล์ etl.py
+3. ทำการ create table, copy, insert, Transform ข้อมูลไปยัง DWH (redshift) -> ไฟล์ etl.py
 ![join](join.jpg)
 
 ```sh
@@ -38,6 +38,8 @@ python etl.py
 ```
 ทดสอบ query บน redshift
 ![sales_table](sales_table.jpg)
+
+์Note : Redshift เป็น Data Warehouse ที่สามารถรองรับข้อมูลขนาดใหญ่ สเกลได้ และเป็น service ของ aws เช่นเดียวกับ S3 มีความสะดวกในการใช้งาน เพราะเป็นระบบฐานข้อมูลเชิงสัมพันธ์ (RDBMS) ที่ใช้ภาษา SQLในการเข้าถึงข้อมูลได้ง่าย
 
 #Optional ถ้าใช้งาน dbt กับ redshift
 ```sh

@@ -117,6 +117,7 @@ copy_table_query = [ """
     """,
 ]
 
+# insert data into the table we created above
 insert_dwh_queries = [
     """
     INSERT INTO sales
