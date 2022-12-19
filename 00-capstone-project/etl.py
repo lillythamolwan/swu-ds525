@@ -1,12 +1,10 @@
 import psycopg2
-
     
 #Drop table ใช้สำหรับล้าง Table เดิมเพื่อรันในครั้งต่อไป
 drop_table_queries = [
     "DROP TABLE IF EXISTS transaction_data",
     "DROP TABLE IF EXISTS product",
     "DROP TABLE IF EXISTS hh_demographic",
-    "DROP TABLE IF EXISTS status",
     "DROP TABLE IF EXISTS sales",
 ]
 
@@ -50,12 +48,6 @@ create_table_query = [
         KID_CATEGORY_DESC text,
         household_key int
     )
-    """,
-    """
-    CREATE TABLE IF NOT EXISTS status (
-        Status text,
-        Count int
-        )
     """,
     """
     CREATE TABLE IF NOT EXISTS sales (
@@ -106,15 +98,7 @@ copy_table_query = [ """
     IGNOREHEADER 1
     REGION 'us-east-1'
     """,
-    """
-    COPY status FROM 's3://lillythamolwan-titanic/status.csv'
-    ACCESS_KEY_ID '1'
-    SECRET_ACCESS_KEY '2'
-    SESSION_TOKEN '3'
-    CSV
-    IGNOREHEADER 1
-    REGION 'us-east-1'
-    """,
+
 ]
 
 # insert data into the table we created above

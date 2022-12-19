@@ -1,6 +1,12 @@
 Capstone Project -> DS525 Data Warehose and Business Intelligence
-1. Upload data source csv file to datalake (S3)
-- open gitpod 
+1. Problem defination > ตั้งคำถามเพื่อค้นหาข้อมูลที่สนใจ
+
+2. Data Wrangling > การสำรวจและทำความสะอาดข้อมูล 
+- Use PowerBI
+![replacevalue](replacevalue.jpg)
+
+3. Upload data source csv file to datalake (S3)
+- Open gitpod 
 - Prepare environment
 
 ```sh
@@ -26,11 +32,11 @@ python main.py
 ```
 ![s3_buckets](s3_buckets.jpg)
 
-2. สร้าง cluster บน redshift โดยต้อง turn on publicly accessible 
+4. สร้าง cluster บน redshift โดยต้อง turn on publicly accessible 
 ![redshift_turnon_public](redshift_turnon_public.jpg)
 ![redshift_turnon_save](redshift_turnon_save.jpg)
 
-3. ทำการ create table, copy, insert, Transform ข้อมูลไปยัง DWH (redshift) -> ไฟล์ etl.py
+5. ทำการ create table, copy, insert, Transform ข้อมูลไปยัง DWH (redshift) -> ไฟล์ etl.py
 ![join](join.jpg)
 
 ```sh
@@ -75,7 +81,7 @@ try_redshift:
 #Optional ทดสอบ connection คำสั่ง
   dbt debug
 
-4. ทำการเชื่อมต่อ redshift โดยใช้ Endpoint กับ BI Tools เช่น Tableau หรือ ดาวน์โหลดไฟล์ CSV จาก redshift เพื่อมาสร้าง Dashboard บน PowerBI
+6. ทำการเชื่อมต่อ redshift โดยใช้ Endpoint กับ BI Tools เช่น Tableau หรือ ดาวน์โหลดไฟล์ CSV จาก redshift เพื่อมาสร้าง Dashboard บน PowerBI
 ![redshift_tableau](redshift_tableau.jpg)
 ![redshift_to_tableau](redshift_to_tableau.jpg)
 
